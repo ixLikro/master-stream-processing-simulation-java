@@ -1,4 +1,4 @@
-package de.stream.processing.g6;
+package de.stream.processing.g6.sensor;
 
 import de.stream.processing.g6.worker.DataSendWorker;
 

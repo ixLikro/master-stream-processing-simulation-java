@@ -5,15 +5,16 @@ import de.stream.processing.g6.util.RandomHelper;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 /**
- * Temperature Data from 2017. Wolfenbüttel
- * Source: https://re.jrc.ec.europa.eu/pvg_tools/en/tools.html
+ * Temperature Data for Wolfenbüttel
+ * Source: https://re.jrc.ec.europa.eu/pvg_tools/en/tools.html - Daily Data - Temperature
  */
-public class TemperatureMonthly {
+public class TemperatureData {
 
-    private static final float[][] data = {
+    private static TemperatureData instance = new TemperatureData();
+
+    private final float[][] rawData = {
         {0.8f, 0.8f, 0.7f, 0.7f, 0.6f, 0.9f, 1.1f, 1.4f, 1.9f, 2.4f, 3.0f, 2.8f, 2.7f, 2.5f, 2.2f, 1.9f, 1.6f, 1.5f, 1.3f, 1.2f, 1.3f, 1.2f, 0.9f, 0.8f},
         {0.9f, 0.8f, 0.8f, 0.8f, 0.7f, 0.6f, 0.6f, 1.2f, 1.9f, 2.5f, 3.2f, 3.8f, 4.4f, 4.4f, 4.4f, 4.5f, 3.8f, 3.1f, 2.4f, 2.1f, 1.9f, 1.6f, 1.4f, 1.2f},
         {3.2f, 3.0f, 2.9f, 2.7f, 2.7f, 2.7f, 2.7f, 3.7f, 4.8f, 5.9f, 6.5f, 7.1f, 7.7f, 7.9f, 8.1f, 8.3f, 7.4f, 6.5f, 5.5f, 5.0f, 4.5f, 4.1f, 3.8f, 3.5f},
@@ -28,14 +29,52 @@ public class TemperatureMonthly {
         {2.3f, 2.3f, 2.2f, 2.2f, 2.3f, 2.3f, 2.5f, 2.7f, 2.9f, 3.4f, 3.9f, 4.4f, 4.1f, 3.8f, 3.5f, 3.3f, 3.0f, 2.8f, 2.7f, 2.6f, 2.5f, 2.4f, 2.3f, 2.0f},
     };
 
-    static float getTemperature(Date date){
+    private final float[][][] data = new float[12][31][24];
+
+    private TemperatureData() {
+
+        /*
+            Due to the average calculation of the raw data is not very extreme. We make the cold month a bit colder and the hot ones hotter.
+            And we add the day to the data. Every month and day get a specific random manipulator that will be added to the row data. This
+            allow us to generate a 'today is a cold Day'-feeling.
+        */
+        for (int month = 0; month < rawData.length; month++) {
+            float monthManipulator = RandomHelper.getFloat(-1f,1f);
+
+            if(month <= 1 || month >= 10){
+                //may make the cold month a bit colder
+                monthManipulator = RandomHelper.getFloat(-3.5f, 1f);
+            }
+
+            if(month >= 5 && month <= 7){
+                //make the hot month hotter
+                monthManipulator = RandomHelper.getFloat(0.5f,6f);
+            }
+
+            for(int day = 0; day < data[month].length; day++){
+                float dayManipulator = RandomHelper.getFloat(-1f, 1f);
+
+                for(int hour = 0; hour < data[month][day].length; day++){
+                    //add manipulator
+                    data[month][day][hour] = rawData[month][hour] + monthManipulator + dayManipulator;
+                }
+            }
+        }
+    }
+
+    public static TemperatureData getInstance() {
+        return instance;
+    }
+
+    public float getTemperature(Date date){
         Calendar calender = new GregorianCalendar();
         calender.setTimeInMillis(date.getTime());
 
         int month = calender.get(Calendar.MONTH);
-        int tag = calender.get(Calendar.DAY_OF_MONTH);
+        int day = calender.get(Calendar.DAY_OF_MONTH);
         int hour = calender.get(Calendar.HOUR_OF_DAY);
 
-        return data[month][hour] + RandomHelper.getFloat(-1f,1f);
+        //return the value and add some sensor noise
+        return data[month][day][hour] + RandomHelper.getFloat(-0.15f,0.15f);
     }
 }

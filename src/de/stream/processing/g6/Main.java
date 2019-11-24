@@ -1,6 +1,7 @@
 package de.stream.processing.g6;
 
-import de.stream.processing.g6.sensorImplemantations.TestSensor;
+import de.stream.processing.g6.sensor.Sensor;
+import de.stream.processing.g6.sensor.TestSensor;
 import de.stream.processing.g6.worker.SimWorker;
 
 import java.util.ArrayList;

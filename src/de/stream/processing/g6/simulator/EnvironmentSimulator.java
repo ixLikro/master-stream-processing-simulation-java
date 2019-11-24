@@ -1,6 +1,4 @@
-package de.stream.processing.g6.Simulater;
-
-import de.stream.processing.g6.Simulator;
+package de.stream.processing.g6.simulator;
 
 import java.util.Date;
 

@@ -1,10 +1,9 @@
 package de.stream.processing.g6.worker;
 
-import de.stream.processing.g6.Sensor;
+import de.stream.processing.g6.sensor.Sensor;
 import de.stream.processing.g6.Setting;
-import de.stream.processing.g6.Simulator;
+import de.stream.processing.g6.simulator.Simulator;
 import de.stream.processing.g6.util.MutableInteger;
-import de.stream.processing.g6.util.RandomHelper;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;

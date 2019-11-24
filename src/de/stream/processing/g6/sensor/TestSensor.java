@@ -1,6 +1,4 @@
-package de.stream.processing.g6.sensorImplemantations;
-
-import de.stream.processing.g6.Sensor;
+package de.stream.processing.g6.sensor;
 
 import java.util.Date;
 
