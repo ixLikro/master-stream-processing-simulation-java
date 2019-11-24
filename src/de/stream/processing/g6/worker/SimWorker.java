@@ -2,7 +2,9 @@ package de.stream.processing.g6.worker;
 
 import de.stream.processing.g6.Sensor;
 import de.stream.processing.g6.Setting;
+import de.stream.processing.g6.Simulator;
 import de.stream.processing.g6.util.MutableInteger;
+import de.stream.processing.g6.util.RandomHelper;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -11,13 +13,18 @@ public class SimWorker extends Thread {
 
     private final Setting settings;
     private final Map<Sensor, MutableInteger> allSensors;
+    private final Map<Simulator, MutableInteger> allSimulator;
     private AtomicBoolean isPaused;
     private final Calendar simTime;
 
-    public SimWorker(List<Sensor> sensors, Setting initSetting){
+    public SimWorker(List<Sensor> sensors, List<Simulator> simulators, Setting initSetting){
         this.allSensors = new HashMap<>();
+        this.allSimulator = new HashMap<>();
         sensors.forEach(sensor -> {
             allSensors.put(sensor, new MutableInteger(1));
+        });
+        simulators.forEach(simulator -> {
+            allSimulator.put(simulator, new MutableInteger(1));
         });
 
         this.settings = initSetting;
@@ -40,7 +47,7 @@ public class SimWorker extends Thread {
                 System.out.println("The simulation speed was set to 1000");
             }
             if(settings.getSimSpeed() < 0){
-                settings.setSimSpeed(1000f);
+                settings.setSimSpeed(0.001f);
                 System.out.println("The simulation only supports a simSpeed between 0.001 and 1000!");
                 System.out.println("The simulation speed was set to 0.001");
             }
@@ -78,6 +85,17 @@ public class SimWorker extends Thread {
 
                 System.out.print("\rSimTime: "+ new Date(simTime.getTimeInMillis()).toString());
             }
+
+
+            //call all simulator if counter is equals to the sensor send interval
+            allSimulator.forEach((simulator, counter) -> {
+                if(counter.get() == simulator.getSendInterval()){
+                    simulator.simulate(new Date(simTime.getTimeInMillis()));
+                    counter.set(1);
+                }else {
+                    counter.increment();
+                }
+            });
 
             //send value if counter is equals to the sensor send interval
             allSensors.forEach((Sensor sensor, MutableInteger counter) -> {

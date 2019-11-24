@@ -17,7 +17,7 @@ public class Main {
         List<Sensor> allSensors = new ArrayList<>();
         allSensors.add(new TestSensor(54001, "Date-Echo Sensor 1", 10));
 
-        new SimWorker(allSensors, new Setting());
+        new SimWorker(allSensors, new ArrayList<>(), new Setting());
 
         //keep simulation alive
         while(true){
