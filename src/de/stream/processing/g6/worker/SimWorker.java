@@ -1,40 +1,106 @@
 package de.stream.processing.g6.worker;
 
 import de.stream.processing.g6.Sensor;
-import de.stream.processing.g6.Settings;
-import org.json.JSONObject;
+import de.stream.processing.g6.Setting;
+import de.stream.processing.g6.util.MutableInteger;
 
-import java.util.Date;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class SimWorker extends Thread {
 
-    private Settings currentSetting;
-    private final List<Sensor> allSensors;
+    private final Setting settings;
+    private final Map<Sensor, MutableInteger> allSensors;
+    private AtomicBoolean isPaused;
+    private final Calendar simTime;
 
-    public SimWorker(List<Sensor> sensors, Settings initSettings){
-        this.allSensors = sensors;
-        this.currentSetting = initSettings;
+    public SimWorker(List<Sensor> sensors, Setting initSetting){
+        this.allSensors = new HashMap<>();
+        sensors.forEach(sensor -> {
+            allSensors.put(sensor, new MutableInteger(1));
+        });
+
+        this.settings = initSetting;
+        this.isPaused = new AtomicBoolean(false);
+        simTime = new GregorianCalendar();
+        simTime.setTime(settings.getStartDate());
 
         this.setDaemon(true);
         this.start();
 
     }
 
-    public void updateSettings(Settings currentSetting) {
-        this.currentSetting = currentSetting;
-    }
+    public void setNewSpeed(float simSpeed) {
+        synchronized (settings){
+            settings.setSimSpeed(simSpeed);
 
-    @Override
-    public void run() {
-        while (!Thread.interrupted()) {
-            try {
-                Thread.sleep(500);
-                allSensors.forEach(sensor -> sensor.sendValue(new Date()));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            if(settings.getSimSpeed() > 1000){
+                settings.setSimSpeed(1000f);
+                System.out.println("The simulation only supports a simSpeed between 0.001 and 1000!");
+                System.out.println("The simulation speed was set to 1000");
+            }
+            if(settings.getSimSpeed() < 0){
+                settings.setSimSpeed(1000f);
+                System.out.println("The simulation only supports a simSpeed between 0.001 and 1000!");
+                System.out.println("The simulation speed was set to 0.001");
             }
         }
     }
+    
+    public void setNewSimTime(Date newSimTime){
+        synchronized (simTime){
+            simTime.setTime(newSimTime);
+        }
+    }
+
+    @Override
+    synchronized public void run() {
+        while (!Thread.interrupted() ) {
+
+            //calculate a simulated second
+            long waitInMills = 0;
+            synchronized (settings){
+                waitInMills = (long)((1. / settings.getSimSpeed()) * 1000);
+            }
+
+            try {
+                //tick every second in simulation time
+                wait(waitInMills);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            //if paused? then skip this simulated second
+            if(isPaused.get()) continue;
+
+            synchronized (simTime){
+                simTime.add(Calendar.SECOND, 1);
+
+                System.out.print("\rSimTime: "+ new Date(simTime.getTimeInMillis()).toString());
+            }
+
+            //send value if counter is equals to the sensor send interval
+            allSensors.forEach((Sensor sensor, MutableInteger counter) -> {
+                if(counter.get() == sensor.getSendInterval()){
+                    sensor.sendValue(new Date(simTime.getTimeInMillis()));
+                    counter.set(1);
+                }else {
+                    counter.increment();
+                }
+            });
+        }
+    }
+
+    public boolean isPaused(){
+        return isPaused.get();
+    }
+
+    public void pause(){
+        isPaused.set(true);
+    }
+
+    public void unPause(){
+        isPaused.set(false);
+    }
+
 }

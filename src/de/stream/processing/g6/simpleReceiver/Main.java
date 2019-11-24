@@ -12,8 +12,6 @@ import java.util.concurrent.Future;
 
 public class Main {
 
-    public static final String SEND_TO = "127.0.0.1";
-
     /**
      * Starts a simple reviver that prints the received Data.
      * @param args ignored
@@ -56,7 +54,7 @@ public class Main {
 
                         while (true){
                             String received = in.readLine();
-                            System.out.println("[NEW] from "+ name+"\n\t"+received);
+                            System.out.println("[NEW Message] from "+ name+"\n\t"+received);
                         }
 
                     }catch (Exception e){
@@ -64,8 +62,8 @@ public class Main {
                     }
                 }
             } catch (IOException e) {
+                System.out.println("Stop Sensor "+ name);
                 e.printStackTrace();
-                System.out.println("Test");
             }
             return null;
         });

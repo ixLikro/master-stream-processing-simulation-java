@@ -2,6 +2,7 @@ package de.stream.processing.g6.worker;
 
 import de.stream.processing.g6.Main;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.concurrent.atomic.AtomicReference;
@@ -58,6 +59,14 @@ public class DataSendWorker extends Thread {
 
             out.write(data.get()+"\n");
             out.flush();
+        }
+
+        //clean up
+        try {
+            out.close();
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

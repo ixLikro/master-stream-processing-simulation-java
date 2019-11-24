@@ -15,14 +15,18 @@ public class Main {
 	    System.out.println("Start of Senor-Data Generator");
 
         List<Sensor> allSensors = new ArrayList<>();
-        allSensors.add(new TestSensor(54001, "Date-Echo Sesor 1"));
+        allSensors.add(new TestSensor(54001, "Date-Echo Sensor 1", 10));
 
-        new SimWorker(allSensors, new Settings());
+        new SimWorker(allSensors, new Setting());
 
-        try {
-            Thread.sleep(50000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        //keep simulation alive
+        while(true){
+            try {
+                Thread.sleep(50000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                break;
+            }
         }
 
         System.out.println("End of Senor-Data Generator");
