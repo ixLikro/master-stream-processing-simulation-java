@@ -54,7 +54,7 @@ public class TemperatureData {
             for(int day = 0; day < data[month].length; day++){
                 float dayManipulator = RandomHelper.getFloat(-1f, 1f);
 
-                for(int hour = 0; hour < data[month][day].length; day++){
+                for(int hour = 0; hour < data[month][day].length; hour++){
                     //add manipulator
                     data[month][day][hour] = rawData[month][hour] + monthManipulator + dayManipulator;
                 }
