@@ -1,6 +1,8 @@
 package de.stream.processing.g6;
 
+import de.stream.processing.g6.data.TemperatureData;
 import de.stream.processing.g6.sensor.Sensor;
+import de.stream.processing.g6.sensor.TemperatureSensor;
 import de.stream.processing.g6.sensor.TestSensor;
 import de.stream.processing.g6.setting.Setting;
 import de.stream.processing.g6.simulator.EnvironmentSimulator;
@@ -26,7 +28,8 @@ public class Simulation {
     private EnvironmentSimulator environmentSimulator = new EnvironmentSimulator(10);
 
     // ************************* sensors
-    private TestSensor testSensor = new TestSensor(54001, "Date-Echo Sensor 1", 10);
+    //private TestSensor testSensor = new TestSensor(54001, "Date-Echo Sensor 1", 10);
+    private TemperatureSensor outsideTempSensor = new TemperatureSensor(54001, "Outside Temperature Sensor", 30);
 
 
     //lists
@@ -40,7 +43,7 @@ public class Simulation {
         new SettingsReaderWorker();
 
         //register sensors an simulators
-        allSensors = Arrays.asList(testSensor);
+        allSensors = Arrays.asList(outsideTempSensor);
         allSimulations = Arrays.asList(environmentSimulator);
     }
 
@@ -68,9 +71,6 @@ public class Simulation {
         return environmentSimulator;
     }
 
-    public TestSensor getTestSensor() {
-        return testSensor;
-    }
 
     public List<Simulator> getAllSimulations() {
         return allSimulations;

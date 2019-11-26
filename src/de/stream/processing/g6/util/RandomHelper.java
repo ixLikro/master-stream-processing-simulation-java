@@ -17,4 +17,7 @@ public class RandomHelper {
         return ((max - min) * random.nextFloat()) + min;
     }
 
+    public static boolean hitPercentChance(double chance){
+        return getDouble(0.,100.) <= chance;
+    }
 }

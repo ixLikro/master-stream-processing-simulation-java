@@ -1,5 +1,7 @@
 package de.stream.processing.g6.sensor;
 
+import org.json.JSONObject;
+
 import java.util.Date;
 
 /**
