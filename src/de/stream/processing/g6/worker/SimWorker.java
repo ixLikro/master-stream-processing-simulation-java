@@ -1,7 +1,7 @@
 package de.stream.processing.g6.worker;
 
 import de.stream.processing.g6.sensor.Sensor;
-import de.stream.processing.g6.Setting;
+import de.stream.processing.g6.setting.Setting;
 import de.stream.processing.g6.simulator.Simulator;
 import de.stream.processing.g6.util.MutableInteger;
 
@@ -36,6 +36,10 @@ public class SimWorker extends Thread {
 
     }
 
+    /**
+     * sets the a new simulation time
+     * @param simSpeed
+     */
     public void setNewSpeed(float simSpeed) {
         synchronized (settings){
             settings.setSimSpeed(simSpeed);
@@ -52,7 +56,11 @@ public class SimWorker extends Thread {
             }
         }
     }
-    
+
+    /**
+     * jump to a new simulation time
+     * @param newSimTime the new time
+     */
     public void setNewSimTime(Date newSimTime){
         synchronized (simTime){
             simTime.setTime(newSimTime);

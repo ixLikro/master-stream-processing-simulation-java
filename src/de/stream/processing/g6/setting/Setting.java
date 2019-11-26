@@ -1,4 +1,4 @@
-package de.stream.processing.g6;
+package de.stream.processing.g6.setting;
 
 import java.util.Date;
 
@@ -8,7 +8,7 @@ public class Setting {
 
     public Setting() {
         startDate = new Date();
-        simSpeed = 1000;
+        simSpeed = 10;
     }
 
     public Setting(Date startDate, float simSpeed) {
