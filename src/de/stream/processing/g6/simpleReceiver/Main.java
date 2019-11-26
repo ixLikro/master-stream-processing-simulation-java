@@ -23,10 +23,14 @@ public class Main {
         Map<Integer, CompletableFuture<Void>> futures = new HashMap<>();
 
         //create receiver
-        sensors.put(54001, "Temp outside");
-        sensors.put(54002, "Barometer 1");
-        sensors.put(54003, "Barometer 2");
-        sensors.put(54004, "Barometer 3");
+        //sensors.put(54001, "Temp outside");
+        //sensors.put(54002, "Barometer 1");
+        //sensors.put(54003, "Barometer 2");
+        //sensors.put(54004, "Barometer 3");
+        sensors.put(54005, "Barometer 3");
+        sensors.put(54006, "Barometer 3");
+        sensors.put(54007, "Barometer 3");
+        sensors.put(54009, "Test");
 
         //start receiver
         for (Map.Entry<Integer, String> entry : sensors.entrySet()) {

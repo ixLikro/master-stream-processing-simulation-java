@@ -1,18 +1,11 @@
 package de.stream.processing.g6;
 
-import de.stream.processing.g6.data.TemperatureData;
-import de.stream.processing.g6.sensor.Barometer;
-import de.stream.processing.g6.sensor.Sensor;
-import de.stream.processing.g6.sensor.TemperatureSensor;
-import de.stream.processing.g6.sensor.TestSensor;
+import de.stream.processing.g6.sensor.*;
 import de.stream.processing.g6.setting.Setting;
-import de.stream.processing.g6.simulator.EnvironmentSimulator;
-import de.stream.processing.g6.simulator.Simulator;
-import de.stream.processing.g6.simulator.WeatherSimulator;
+import de.stream.processing.g6.simulator.*;
 import de.stream.processing.g6.worker.SettingsReaderWorker;
 import de.stream.processing.g6.worker.SimWorker;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,13 +22,11 @@ public class Simulation {
     // ************************* simulator objects
     private EnvironmentSimulator environmentSimulator = new EnvironmentSimulator(10);
     private WeatherSimulator weatherSimulator = new WeatherSimulator();
-
-    // ************************* sensors
-    //private TestSensor testSensor = new TestSensor(54001, "Date-Echo Sensor 1", 10);
-    private TemperatureSensor outsideTempSensor = new TemperatureSensor(54001, "Outside Temperature Sensor", 30);
-    private Barometer barometer1 = new Barometer(54002, "Barometer 1", 60);
-    private Barometer barometer2 = new Barometer(54003, "Barometer 2", 60);
-    private Barometer barometer3 = new Barometer(54004, "Barometer 3", 60);
+    private RoomSimulator livingRoom = new RoomSimulator(40);
+    private RoomSimulator bathroom = new RoomSimulator(15);
+    private RoomSimulator bedroom = new RoomSimulator(20);
+    private RoomSimulator kitchenRoom = new RoomSimulator(25);
+    private EnergySimulator energySimulator = new EnergySimulator();
 
 
     //lists
@@ -45,12 +36,52 @@ public class Simulation {
 
     private Simulation(){
 
+        // ************************* sensors
+        TemperatureSensor outsideTempSensor = new TemperatureSensor(54001, "Outside Temperature Sensor", 10 * 60);
+        Barometer barometer1 = new Barometer(54002, "Barometer 1",  30 * 60);
+        Barometer barometer2 = new Barometer(54003, "Barometer 2", 30 * 60);
+        Barometer barometer3 = new Barometer(54004, "Barometer 3", 30 *60);
+        AirQualitySensor livingAir = new AirQualitySensor(54005, "Air quality - living room", livingRoom);
+        AirQualitySensor bathroomAir = new AirQualitySensor(54006, "Air quality - bathroom", bathroom);
+        AirQualitySensor bedroomAir = new AirQualitySensor(54007, "Air quality - bedroom", bedroom);
+        AirQualitySensor kitchenAir = new AirQualitySensor(54009, "Air quality - kitchen", kitchenRoom);
+        WindowSensor livingWindow = new WindowSensor(54010, "Window - living room", livingRoom);
+        WindowSensor bathWindow = new WindowSensor(54011, "Window - bathroom", bathroom);
+        WindowSensor bedWindow = new WindowSensor(54012, "Window - bedroom", bedroom);
+        WindowSensor kitchenWindow = new WindowSensor(54013, "Window - kitchen", kitchenRoom);
+        EnergyConsumptionSensor energyConsumptionSensor = new EnergyConsumptionSensor(54014, "Energy Consumption Sensor" , 10 * 60);
+        EnergyPhotovoltaicProduceSensor energyPhotovoltaicProduceSensor = new EnergyPhotovoltaicProduceSensor(54015, "Photovoltaic produce Sensor", 10 * 60);
+        BatterySensor batterySensor = new BatterySensor(54016,"Battery Level", 10 * 60);
+
+
+
         //starts the settingsReaderWorker
         new SettingsReaderWorker();
 
         //register sensors an simulators
-        allSensors = Arrays.asList(outsideTempSensor, barometer1, barometer2, barometer3);
-        allSimulations = Arrays.asList(environmentSimulator, weatherSimulator);
+        allSensors = Arrays.asList(
+                outsideTempSensor,
+                barometer1,
+                barometer2,
+                barometer3,
+                livingAir,
+                bedroomAir,
+                bathroomAir,
+                kitchenAir,
+                livingWindow,
+                bathWindow,
+                bedWindow,
+                kitchenWindow,
+                energyConsumptionSensor,
+                energyPhotovoltaicProduceSensor,
+                batterySensor);
+        allSimulations = Arrays.asList(environmentSimulator,
+                weatherSimulator,
+                livingRoom,
+                bathroom,
+                bedroom,
+                kitchenRoom,
+                energySimulator);
     }
 
 
@@ -87,5 +118,25 @@ public class Simulation {
 
     public List<Sensor> getAllSensors() {
         return allSensors;
+    }
+
+    public RoomSimulator getLivingRoom() {
+        return livingRoom;
+    }
+
+    public RoomSimulator getBathroom() {
+        return bathroom;
+    }
+
+    public RoomSimulator getBedRoom() {
+        return bedroom;
+    }
+
+    public RoomSimulator getKitchenRoom() {
+        return kitchenRoom;
+    }
+
+    public EnergySimulator getEnergySimulator() {
+        return energySimulator;
     }
 }

@@ -14,6 +14,8 @@ public class Main {
     //global settings
     public static final String SEND_TO = "127.0.0.1";
     public static final String PATH_TO_CONFIG = "settings.conf";
+    public static final float PHOTOVOLTAIC_AREA = 10; //in m^2
+    public static final float BATTERY_CAPACITY = 13.50f; //in kwh
 
     public static boolean run = true;
 

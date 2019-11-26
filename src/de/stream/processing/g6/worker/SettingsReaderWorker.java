@@ -25,6 +25,11 @@ public class SettingsReaderWorker extends Thread {
         float lastSimSpeed = 10f;
         String lastState = "false";
 
+        boolean lastLivingWindowClosed = false;
+        boolean lastBedWindowClosed = false;
+        boolean lastKitchenWindowClosed = false;
+        boolean lastBathWindowClosed = false;
+
         while (!interrupted()){
 
             //read file every second
@@ -94,6 +99,34 @@ public class SettingsReaderWorker extends Thread {
                                         lastDate = newDate.getTimeInMillis();
                                         Simulation.getInstance().getSimWorker().setNewSimTime(new Date(lastDate));
                                     }
+                                }
+                                break;
+                            case "livingRoomWindowsAreClosed":
+                                boolean livingClosed = split[1].strip().equals("1");
+                                if(!livingClosed == lastLivingWindowClosed){
+                                    lastLivingWindowClosed = livingClosed;
+                                    Simulation.getInstance().getLivingRoom().setWindowsAreClosed(livingClosed);
+                                }
+                                break;
+                            case "bathroomWindowsAreClosed":
+                                boolean bathClosed = split[1].strip().equals("1");
+                                if(!bathClosed == lastBathWindowClosed){
+                                    lastBathWindowClosed = bathClosed;
+                                    Simulation.getInstance().getBathroom().setWindowsAreClosed(bathClosed);
+                                }
+                                break;
+                            case "bedRoomWindowsAreClosed":
+                                boolean bedCloased = split[1].strip().equals("1");
+                                if(!bedCloased == lastBedWindowClosed){
+                                    lastBedWindowClosed = bedCloased;
+                                    Simulation.getInstance().getBedRoom().setWindowsAreClosed(bedCloased);
+                                }
+                                break;
+                            case "kitchenWindowsAreClosed":
+                                boolean kitchenClosed = split[1].strip().equals("1");
+                                if(!kitchenClosed == lastKitchenWindowClosed){
+                                    lastKitchenWindowClosed = kitchenClosed;
+                                    Simulation.getInstance().getKitchenRoom().setWindowsAreClosed(kitchenClosed);
                                 }
                                 break;
                         }

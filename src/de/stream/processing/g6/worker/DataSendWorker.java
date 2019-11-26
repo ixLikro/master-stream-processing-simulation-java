@@ -44,6 +44,7 @@ public class DataSendWorker extends Thread {
             out = new PrintWriter(socket.getOutputStream(), true);
         }catch (Exception e){
             System.out.println("Error while creating a socket connection!");
+            System.out.println("Port:" +port);
             e.printStackTrace();
             return;
         }

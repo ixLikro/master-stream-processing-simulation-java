@@ -1,5 +1,6 @@
 package de.stream.processing.g6.worker;
 
+import de.stream.processing.g6.Main;
 import de.stream.processing.g6.Simulation;
 import de.stream.processing.g6.sensor.Sensor;
 import de.stream.processing.g6.setting.Setting;
@@ -96,7 +97,13 @@ public class SimWorker extends Thread {
                         + ", outTemp: "+ Simulation.getInstance().getEnvironmentSimulator().getOutsideTemperature()
                         + ", current Weather: "
                         + Simulation.getInstance().getWeatherSimulator().getCurrentWeather()
-                        + ", coming Weather: "+ Simulation.getInstance().getWeatherSimulator().getComingWeather());
+                        + ", coming Weather: "+ Simulation.getInstance().getWeatherSimulator().getComingWeather()
+                        + ", ppm Kitchen: "+ Simulation.getInstance().getKitchenRoom().getPpm()
+                        + ", ppm Badroom: "+ Simulation.getInstance().getBedRoom().getPpm()
+                        + ", e Consumption: "+ Simulation.getInstance().getEnergySimulator().getConsumption()
+                        + ", e Produce: "+ Simulation.getInstance().getEnergySimulator().getProduce()
+                        + " Battery Level: " + (Simulation.getInstance().getEnergySimulator().getBatteryLevel() / Main.BATTERY_CAPACITY) * 100 + "%"
+                );
             }
 
 

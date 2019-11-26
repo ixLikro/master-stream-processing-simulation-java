@@ -33,7 +33,7 @@ public class Barometer extends Sensor {
         sensorInfo.put("type", "BMP085");
         sensorInfo.put("Measuring range", accuracy);
         sensorInfo.put("accuracy class", "SF-3");
-        sensorInfo.put("product type", "Mercury barometersr");
+        sensorInfo.put("product type", "Mercury barometer");
     }
 
     @Override
