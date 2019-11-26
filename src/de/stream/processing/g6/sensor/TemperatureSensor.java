@@ -5,9 +5,6 @@ import de.stream.processing.g6.util.RandomHelper;
 import org.json.JSONObject;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
 
 public class TemperatureSensor extends Sensor {
 
@@ -38,7 +35,7 @@ public class TemperatureSensor extends Sensor {
 
         //may create a outlier
         if(RandomHelper.hitPercentChance(7)){
-            tempValue = RandomHelper.hitPercentChance(50) ? (tempValue + RandomHelper.getFloat(205f, 250f)) : (tempValue - RandomHelper.getFloat(-150f,-100f));
+            tempValue = RandomHelper.hitPercentChance(50) ? (tempValue + RandomHelper.getFloat(205f, 250f)) : (tempValue + RandomHelper.getFloat(-150f,-100f));
         }
 
         value.put("value", tempValue + 273.15);

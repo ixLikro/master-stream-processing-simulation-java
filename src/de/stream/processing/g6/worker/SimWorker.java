@@ -1,5 +1,6 @@
 package de.stream.processing.g6.worker;
 
+import de.stream.processing.g6.Simulation;
 import de.stream.processing.g6.sensor.Sensor;
 import de.stream.processing.g6.setting.Setting;
 import de.stream.processing.g6.simulator.Simulator;
@@ -90,7 +91,12 @@ public class SimWorker extends Thread {
             synchronized (simTime){
                 simTime.add(Calendar.SECOND, 1);
 
-                System.out.print("\rSimTime: "+ new Date(simTime.getTimeInMillis()).toString());
+                System.out.print("\rSimTime: "+ new Date(simTime.getTimeInMillis()).toString()
+                        + ", Speed: "+ settings.getSimSpeed()
+                        + ", outTemp: "+ Simulation.getInstance().getEnvironmentSimulator().getOutsideTemperature()
+                        + ", current Weather: "
+                        + Simulation.getInstance().getWeatherSimulator().getCurrentWeather()
+                        + ", coming Weather: "+ Simulation.getInstance().getWeatherSimulator().getComingWeather());
             }
 
 
