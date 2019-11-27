@@ -20,9 +20,9 @@ public class EnergySimulator extends Simulator {
     //in kwh
     private float batteryLevel = Main.BATTERY_CAPACITY / 2;
 
-    public EnergySimulator() {
+    public EnergySimulator(int simulationInterval) {
         //simulate every hour
-        super(60);
+        super(simulationInterval);
     }
 
 

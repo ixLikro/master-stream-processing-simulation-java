@@ -17,8 +17,8 @@ public class WindowSensor extends Sensor {
     private RoomSimulator roomSimulator;
     private List<Integer> windowIDs;
 
-    public WindowSensor(int port, String name, RoomSimulator roomSimulator) {
-        super(port, name, 10);
+    public WindowSensor(int port, String name, RoomSimulator roomSimulator, int sendInterval) {
+        super(port, name, sendInterval);
 
         windowIDs = new ArrayList<>();
 

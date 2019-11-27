@@ -26,7 +26,7 @@ public class Simulation {
     private RoomSimulator bathroom = new RoomSimulator(15);
     private RoomSimulator bedroom = new RoomSimulator(20);
     private RoomSimulator kitchenRoom = new RoomSimulator(25);
-    private EnergySimulator energySimulator = new EnergySimulator();
+    private EnergySimulator energySimulator = new EnergySimulator(60);
 
 
     //lists
@@ -41,17 +41,17 @@ public class Simulation {
         Barometer barometer1 = new Barometer(54002, "Barometer 1",  30 * 60);
         Barometer barometer2 = new Barometer(54003, "Barometer 2", 30 * 60);
         Barometer barometer3 = new Barometer(54004, "Barometer 3", 30 *60);
-        AirQualitySensor livingAir = new AirQualitySensor(54005, "Air quality - living room", livingRoom);
-        AirQualitySensor bathroomAir = new AirQualitySensor(54006, "Air quality - bathroom", bathroom);
-        AirQualitySensor bedroomAir = new AirQualitySensor(54007, "Air quality - bedroom", bedroom);
-        AirQualitySensor kitchenAir = new AirQualitySensor(54009, "Air quality - kitchen", kitchenRoom);
-        WindowSensor livingWindow = new WindowSensor(54010, "Window - living room", livingRoom);
-        WindowSensor bathWindow = new WindowSensor(54011, "Window - bathroom", bathroom);
-        WindowSensor bedWindow = new WindowSensor(54012, "Window - bedroom", bedroom);
-        WindowSensor kitchenWindow = new WindowSensor(54013, "Window - kitchen", kitchenRoom);
-        EnergyConsumptionSensor energyConsumptionSensor = new EnergyConsumptionSensor(54014, "Energy Consumption Sensor" , 10 * 60);
-        EnergyPhotovoltaicProduceSensor energyPhotovoltaicProduceSensor = new EnergyPhotovoltaicProduceSensor(54015, "Photovoltaic produce Sensor", 10 * 60);
-        BatterySensor batterySensor = new BatterySensor(54016,"Battery Level", 10 * 60);
+        AirQualitySensor livingAir = new AirQualitySensor(54005, "Air quality - living room", livingRoom, 60);
+        AirQualitySensor bathroomAir = new AirQualitySensor(54006, "Air quality - bathroom", bathroom, 60);
+        AirQualitySensor bedroomAir = new AirQualitySensor(54007, "Air quality - bedroom", bedroom, 60);
+        AirQualitySensor kitchenAir = new AirQualitySensor(54009, "Air quality - kitchen", kitchenRoom, 60);
+        WindowSensor livingWindow = new WindowSensor(54010, "Window - living room", livingRoom, 10);
+        WindowSensor bathWindow = new WindowSensor(54011, "Window - bathroom", bathroom, 10);
+        WindowSensor bedWindow = new WindowSensor(54012, "Window - bedroom", bedroom ,10);
+        WindowSensor kitchenWindow = new WindowSensor(54013, "Window - kitchen", kitchenRoom, 10);
+        EnergyConsumptionSensor energyConsumptionSensor = new EnergyConsumptionSensor(54014, "Energy Consumption Sensor" , 60);
+        EnergyPhotovoltaicProduceSensor energyPhotovoltaicProduceSensor = new EnergyPhotovoltaicProduceSensor(54015, "Photovoltaic produce Sensor",  60);
+        BatterySensor batterySensor = new BatterySensor(54016,"Battery Level", 60);
 
 
 

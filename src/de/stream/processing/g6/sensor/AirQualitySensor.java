@@ -12,8 +12,8 @@ public class AirQualitySensor extends Sensor {
     private RoomSimulator roomSimulator;
     private JSONObject sensorInfo;
 
-    public AirQualitySensor(int port, String name, RoomSimulator roomSimulator) {
-        super(port, name, 45);
+    public AirQualitySensor(int port, String name, RoomSimulator roomSimulator, int simulationInterval) {
+        super(port, name, simulationInterval);
 
         this.roomSimulator = roomSimulator;
 

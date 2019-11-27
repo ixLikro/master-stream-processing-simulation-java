@@ -2,7 +2,6 @@ package de.stream.processing.g6.simulator;
 
 import de.stream.processing.g6.util.RandomHelper;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
