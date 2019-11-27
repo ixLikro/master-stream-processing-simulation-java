@@ -92,17 +92,19 @@ public class SimWorker extends Thread {
             synchronized (simTime){
                 simTime.add(Calendar.SECOND, 1);
 
-                System.out.print("\rSimTime: "+ new Date(simTime.getTimeInMillis()).toString()
-                        + ", Speed: "+ settings.getSimSpeed()
-                        + ", outTemp: "+ Simulation.getInstance().getEnvironmentSimulator().getOutsideTemperature()
-                        + ", current Weather: "
-                        + Simulation.getInstance().getWeatherSimulator().getCurrentWeather()
-                        + ", coming Weather: "+ Simulation.getInstance().getWeatherSimulator().getComingWeather()
+                System.out.print(
+                        "\rSimTime: "+ new Date(simTime.getTimeInMillis()).toString()
+//                        + ", Speed: "+ settings.getSimSpeed()
+//                        + ", outTemp: "+ Simulation.getInstance().getEnvironmentSimulator().getOutsideTemperature()
+//                        + ", current Weather: " + Simulation.getInstance().getWeatherSimulator().getCurrentWeather()
+//                        + ", coming Weather: "+ Simulation.getInstance().getWeatherSimulator().getComingWeather()
                         + ", ppm Kitchen: "+ Simulation.getInstance().getKitchenRoom().getPpm()
+                        + ", ppm LivingRoom: "+ Simulation.getInstance().getLivingRoom().getPpm()
                         + ", ppm Badroom: "+ Simulation.getInstance().getBedRoom().getPpm()
-                        + ", e Consumption: "+ Simulation.getInstance().getEnergySimulator().getConsumption()
-                        + ", e Produce: "+ Simulation.getInstance().getEnergySimulator().getProduce()
-                        + " Battery Level: " + (Simulation.getInstance().getEnergySimulator().getBatteryLevel() / Main.BATTERY_CAPACITY) * 100 + "%"
+                        + ", ppm Bathroom: " + Simulation.getInstance().getBathroom().getPpm()
+//                        + ", e Consumption: "+ Simulation.getInstance().getEnergySimulator().getConsumption()
+//                        + ", e Produce: "+ Simulation.getInstance().getEnergySimulator().getProduce()
+//                        + " Battery Level: " + (Simulation.getInstance().getEnergySimulator().getBatteryLevel() / Main.BATTERY_CAPACITY) * 100 + "%"
                 );
             }
 

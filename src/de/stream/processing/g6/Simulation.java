@@ -20,12 +20,12 @@ public class Simulation {
     private SimWorker simWorker;
 
     // ************************* simulator objects
-    private EnvironmentSimulator environmentSimulator = new EnvironmentSimulator(10);
     private WeatherSimulator weatherSimulator = new WeatherSimulator();
-    private RoomSimulator livingRoom = new RoomSimulator(40);
-    private RoomSimulator bathroom = new RoomSimulator(15);
-    private RoomSimulator bedroom = new RoomSimulator(20);
-    private RoomSimulator kitchenRoom = new RoomSimulator(25);
+    private RoomSimulator livingRoom = new RoomSimulator(40, 1);
+    private RoomSimulator bathroom = new RoomSimulator(15, 2);
+    private RoomSimulator bedroom = new RoomSimulator(20, 3);
+    private RoomSimulator kitchenRoom = new RoomSimulator(25, 4);
+    private EnvironmentSimulator environmentSimulator = new EnvironmentSimulator(new RoomSimulator[]{livingRoom, bathroom, bedroom, kitchenRoom},10);
     private EnergySimulator energySimulator = new EnergySimulator(60);
 
 
