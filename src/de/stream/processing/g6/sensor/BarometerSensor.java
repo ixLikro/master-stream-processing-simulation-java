@@ -9,12 +9,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Barometer extends Sensor {
+public class BarometerSensor extends Sensor {
 
     private JSONObject sensorInfo;
     private Map<Weather, Float> pascalToWeather;
 
-    public Barometer(int port, String name, int sendInterval) {
+    public BarometerSensor(int port, String name, int sendInterval) {
         super(port, name, sendInterval);
 
         pascalToWeather = new HashMap<>();

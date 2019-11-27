@@ -96,22 +96,22 @@ public class SimWorker extends Thread {
                         "\rSimTime: "+ new Date(simTime.getTimeInMillis()).toString()
 //                        + ", Speed: "+ settings.getSimSpeed()
 //                        + ", outTemp: "+ Simulation.getInstance().getEnvironmentSimulator().getOutsideTemperature()
-//                        + ", current Weather: " + Simulation.getInstance().getWeatherSimulator().getCurrentWeather()
-//                        + ", coming Weather: "+ Simulation.getInstance().getWeatherSimulator().getComingWeather()
+                        + ", current Weather: " + Simulation.getInstance().getWeatherSimulator().getCurrentWeather()
+                        + ", coming Weather: "+ Simulation.getInstance().getWeatherSimulator().getComingWeather()
                         + ", ppm Kitchen: "+ Simulation.getInstance().getKitchenRoom().getPpm()
-                        + ", ppm LivingRoom: "+ Simulation.getInstance().getLivingRoom().getPpm()
-                        + ", ppm Badroom: "+ Simulation.getInstance().getBedRoom().getPpm()
-                        + ", ppm Bathroom: " + Simulation.getInstance().getBathroom().getPpm()
+//                        + ", ppm LivingRoom: "+ Simulation.getInstance().getLivingRoom().getPpm()
+//                        + ", ppm Badroom: "+ Simulation.getInstance().getBedRoom().getPpm()
+//                        + ", ppm Bathroom: " + Simulation.getInstance().getBathroom().getPpm()
 //                        + ", e Consumption: "+ Simulation.getInstance().getEnergySimulator().getConsumption()
 //                        + ", e Produce: "+ Simulation.getInstance().getEnergySimulator().getProduce()
-//                        + " Battery Level: " + (Simulation.getInstance().getEnergySimulator().getBatteryLevel() / Main.BATTERY_CAPACITY) * 100 + "%"
+                        + " Battery Level: " + (Simulation.getInstance().getEnergySimulator().getBatteryLevel() / Main.BATTERY_CAPACITY) * 100 + "%"
                 );
             }
 
 
             //call all simulator if counter is equals to the sensor send interval
             allSimulator.forEach((simulator, counter) -> {
-                if(counter.get() == simulator.getSendInterval()){
+                if(counter.get() >= simulator.getSendInterval()){
                     simulator.simulate(new Date(simTime.getTimeInMillis()));
                     counter.set(1);
                 }else {
@@ -121,7 +121,7 @@ public class SimWorker extends Thread {
 
             //send value if counter is equals to the sensor send interval
             allSensors.forEach((Sensor sensor, MutableInteger counter) -> {
-                if(counter.get() == sensor.getSendInterval()){
+                if(counter.get() >= sensor.getSendInterval()){
                     sensor.sendValue(new Date(simTime.getTimeInMillis()));
                     counter.set(1);
                 }else {

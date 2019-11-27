@@ -1,5 +1,6 @@
 package de.stream.processing.g6.sensor;
 
+import de.stream.processing.g6.Main;
 import de.stream.processing.g6.Simulation;
 import de.stream.processing.g6.util.RandomHelper;
 import org.json.JSONObject;
@@ -18,7 +19,7 @@ public class BatterySensor extends Sensor {
         sensorInfo.put("type", "CELF 461 v3");
 
         batteryInfo = new JSONObject();
-        batteryInfo.put("Usable capacity", "13.5 kw");
+        batteryInfo.put("Usable capacity", Main.BATTERY_CAPACITY);
         batteryInfo.put("depth of discharge", "100 %");
         batteryInfo.put("effectiveness", "90 %");
         batteryInfo.put("ambient temperature", "-20 C uo 50 C");
@@ -31,11 +32,6 @@ public class BatterySensor extends Sensor {
 
         float energy = Simulation.getInstance().getEnergySimulator().getBatteryLevel();
 
-        //may create a outlier
-        if(RandomHelper.hitPercentChance(8)){
-            energy = energy *(-1);
-        }
-
         value.put("value", energy);
         value.put("measuring Unit", "kw");
 
@@ -43,7 +39,9 @@ public class BatterySensor extends Sensor {
         ret.put("name", name);
         ret.put("measuring", value);
         ret.put("timestamp", simTime.getTime());
-        ret.put("batter Info", batteryInfo);
+        ret.put("battery Info", batteryInfo);
         ret.put("sensor Info", sensorInfo);
+
+        sender.sendData(ret.toString());
     }
 }

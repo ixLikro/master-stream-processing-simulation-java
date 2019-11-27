@@ -37,5 +37,7 @@ public class EnergyPhotovoltaicProduceSensor extends Sensor {
         ret.put("measuring", value);
         ret.put("timestamp", simTime.getTime());
         ret.put("sensor Info", sensorInfo);
+
+        sender.sendData(ret.toString());
     }
 }
