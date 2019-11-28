@@ -34,7 +34,7 @@ public class TemperatureSensor extends Sensor {
         float tempValue = Simulation.getInstance().getEnvironmentSimulator().getOutsideTemperature();
 
         //may create a outlier
-        if(RandomHelper.hitPercentChance(7)){
+        if(RandomHelper.hitPercentChance(2)){
             tempValue = RandomHelper.hitPercentChance(50) ? (tempValue + RandomHelper.getFloat(205f, 250f)) : (tempValue + RandomHelper.getFloat(-150f,-100f));
         }
 

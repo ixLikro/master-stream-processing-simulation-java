@@ -35,7 +35,7 @@ public class AirQualitySensor extends Sensor {
         double ppm = roomSimulator.getPpm();
 
         //may create a outlier
-        if(RandomHelper.hitPercentChance(5)){
+        if(RandomHelper.hitPercentChance(3)){
            ppm = ppm *(-1);
         }
 

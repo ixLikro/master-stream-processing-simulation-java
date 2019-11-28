@@ -25,7 +25,7 @@ public class EnergyConsumptionSensor extends Sensor {
         float energy = Simulation.getInstance().getEnergySimulator().getConsumption();
 
         //may create a outlier
-        if(RandomHelper.hitPercentChance(8)){
+        if(RandomHelper.hitPercentChance(3)){
             energy = energy *(-1);
         }
 

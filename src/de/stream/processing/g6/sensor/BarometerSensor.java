@@ -58,7 +58,7 @@ public class BarometerSensor extends Sensor {
         }
 
         //may create a outlier
-        if(RandomHelper.hitPercentChance(10)){
+        if(RandomHelper.hitPercentChance(7)){
             pressure = pressure + RandomHelper.getFloat(300f, 500f);
         }
 

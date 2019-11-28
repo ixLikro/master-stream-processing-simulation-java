@@ -37,10 +37,11 @@ public class Simulation {
     private Simulation(){
 
         // ************************* sensors
+        SimTimeSensor simTimeSensor = new SimTimeSensor(54000, "SimTime Sensor");
         TemperatureSensor outsideTempSensor = new TemperatureSensor(54001, "Outside Temperature Sensor", 10 * 60);
-        BarometerSensor barometer1 = new BarometerSensor(54002, "Barometer 1",  30 * 60);
-        BarometerSensor barometer2 = new BarometerSensor(54003, "Barometer 2", 30 * 60);
-        BarometerSensor barometer3 = new BarometerSensor(54004, "Barometer 3", 30 *60);
+        BarometerSensor barometer1 = new BarometerSensor(54002, "Barometer 1",  12 * 60);
+        BarometerSensor barometer2 = new BarometerSensor(54003, "Barometer 2", 12 * 60);
+        BarometerSensor barometer3 = new BarometerSensor(54004, "Barometer 3", 12 *60);
         AirQualitySensor livingAir = new AirQualitySensor(54005, "Air quality - living room", livingRoom, 60);
         AirQualitySensor bathroomAir = new AirQualitySensor(54006, "Air quality - bathroom", bathroom, 60);
         AirQualitySensor bedroomAir = new AirQualitySensor(54007, "Air quality - bedroom", bedroom, 60);
@@ -60,6 +61,7 @@ public class Simulation {
 
         //register sensors an simulators
         allSensors = Arrays.asList(
+                simTimeSensor,
                 outsideTempSensor,
                 barometer1,
                 barometer2,

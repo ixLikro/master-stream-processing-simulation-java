@@ -21,7 +21,7 @@ public class RoomSimulator extends Simulator {
 
         size = floorSize;
         windowsAreClosed = true;
-        ppm = 800.;
+        ppm = 600.;
         this.roomID = roomID;
     }
 
@@ -36,8 +36,8 @@ public class RoomSimulator extends Simulator {
             }
         }else {
             if(Simulation.getInstance().getEnvironmentSimulator().amIProduceBadAir(this)){
-                int random = RandomHelper.getInteger(-1, 12);
-                ppm += (random / (2 * size)) * simulationInterval;
+                int random = RandomHelper.getInteger(5, 10);
+                ppm += ((random / (size)) * (simulationInterval / 2.) / 4);
 
                 if(ppm > worstAir){
                     ppm = worstAir;
