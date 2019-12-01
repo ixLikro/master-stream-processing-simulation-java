@@ -32,7 +32,7 @@ The energy simulation is based on the [Photovoltaic Geographical Information Sys
 All velures are send as JSON string
 
 ## Dynamic Settings
-You can change some settings like simulation speed, window states or the current simulation time even if the simulation is currently running! <br> See [settings.conf]() for more information
+You can change some settings like simulation speed, window states or the current simulation time even if the simulation is currently running! <br> See [settings.conf](https://github.com/ixLikro/master-stream-processing-simulation-java/blob/master/settings.conf) for more information
 
 
 
