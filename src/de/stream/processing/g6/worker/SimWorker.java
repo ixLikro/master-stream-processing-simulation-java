@@ -93,18 +93,18 @@ public class SimWorker extends Thread {
                 simTime.add(Calendar.SECOND, 1);
 
                 System.out.print(
-                        "\rSimTime: "+ new Date(simTime.getTimeInMillis()).toString()
-//                        + ", Speed: "+ settings.getSimSpeed()
-//                        + ", outTemp: "+ Simulation.getInstance().getEnvironmentSimulator().getOutsideTemperature()
-                        + ", current Weather: " + Simulation.getInstance().getWeatherSimulator().getCurrentWeather()
-                        + ", coming Weather: "+ Simulation.getInstance().getWeatherSimulator().getComingWeather()
-//                        + ", ppm Kitchen: "+ Simulation.getInstance().getKitchenRoom().getPpm()
-                        + ", ppm LivingRoom: "+ Simulation.getInstance().getLivingRoom().getPpm()
-//                        + ", ppm Badroom: "+ Simulation.getInstance().getBedRoom().getPpm()
-//                        + ", ppm Bathroom: " + Simulation.getInstance().getBathroom().getPpm()
-//                        + ", e Consumption: "+ Simulation.getInstance().getEnergySimulator().getConsumption()
-//                        + ", e Produce: "+ Simulation.getInstance().getEnergySimulator().getProduce()
-                        + " Battery Level: " + (Simulation.getInstance().getEnergySimulator().getBatteryLevel() / Main.BATTERY_CAPACITY) * 100 + "%"
+                        "SimTime: "+ new Date(simTime.getTimeInMillis()).toString()
+                        + "\n\tSpeed: "+ settings.getSimSpeed()
+                        + "\n\toutTemp: "+ Simulation.getInstance().getEnvironmentSimulator().getOutsideTemperature()
+                        + "\n\tcurrent Weather: " + Simulation.getInstance().getWeatherSimulator().getCurrentWeather()
+                        + "\n\tcoming Weather: "+ Simulation.getInstance().getWeatherSimulator().getComingWeather()
+                        + "\n\tppm Kitchen: "+ Simulation.getInstance().getKitchenRoom().getPpm()
+                        + "\n\tppm LivingRoom: "+ Simulation.getInstance().getLivingRoom().getPpm()
+                        + "\n\tppm Badroom: "+ Simulation.getInstance().getBedRoom().getPpm()
+                        + "\n\tppm Bathroom: " + Simulation.getInstance().getBathroom().getPpm()
+                        + "\n\te Consumption: "+ Simulation.getInstance().getEnergySimulator().getConsumption()
+                        + "\n\te Produce: "+ Simulation.getInstance().getEnergySimulator().getProduce()
+                        + "\n\tBattery Level: " + (Simulation.getInstance().getEnergySimulator().getBatteryLevel() / Main.BATTERY_CAPACITY) * 100 + "%"
                 );
             }
 

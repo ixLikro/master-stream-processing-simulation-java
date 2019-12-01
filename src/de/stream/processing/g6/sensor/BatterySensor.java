@@ -33,7 +33,7 @@ public class BatterySensor extends Sensor {
         float energy = Simulation.getInstance().getEnergySimulator().getBatteryLevel();
 
         value.put("value", energy);
-        value.put("measuring Unit", "kw");
+        value.put("measuring Unit", "kWh");
 
         JSONObject ret = new JSONObject();
         ret.put("name", name);
