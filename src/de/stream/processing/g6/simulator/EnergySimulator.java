@@ -21,17 +21,15 @@ public class EnergySimulator extends Simulator {
     private float batteryLevel = 0;
 
     public EnergySimulator(int simulationInterval) {
-        //simulate every hour
         super(simulationInterval);
     }
 
 
     @Override
     public void simulate(Date simTime) {
-
+        //both in kw
         consumption = EnergyConsumptionData.getInstance().getConsumption(simTime);
-
-        produce = PhotovoltaicPowerData.instance.getPhotovoltaicEnergy(simTime);
+        produce = PhotovoltaicPowerData.getInstance().getPhotovoltaicEnergy(simTime);
 
         Weather currentWeather = Simulation.getInstance().getWeatherSimulator().getCurrentWeather();
         if(currentWeather != Weather.CLEAR_SKY){
@@ -45,6 +43,7 @@ public class EnergySimulator extends Simulator {
                 produce -= produce * 0.8;
         }
 
+        //batteryLevel in kwh (we get every minute a new value, convert kwm in kwh)
         batteryLevel += (produce - consumption) * (1d/60);
 
         if(batteryLevel > Main.BATTERY_CAPACITY){

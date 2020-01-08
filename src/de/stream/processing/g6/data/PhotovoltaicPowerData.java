@@ -8,7 +8,10 @@ import java.util.GregorianCalendar;
 
 public class PhotovoltaicPowerData {
 
-    public static PhotovoltaicPowerData instance = new PhotovoltaicPowerData();
+    private static PhotovoltaicPowerData instance = new PhotovoltaicPowerData();
+    public static PhotovoltaicPowerData getInstance() {
+        return instance;
+    }
 
     //watt per m^2 in Wolfenbüttel,
     //rawData[Month][Hour]

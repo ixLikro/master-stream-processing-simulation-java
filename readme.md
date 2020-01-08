@@ -13,7 +13,7 @@ The energy simulation is based on the [Photovoltaic Geographical Information Sys
 ## Simulated Senors:
 | Sensor  | Port  | Send interval <br> in second (Simulation Time)  | Description  |
 |---|---|---|---|
-| Sim Time Sensor  | 54000  | 1  | Send the current Simulation Time as java Timestamp  |
+| Sim Time Sensor  | 54000  |1  | Send the current Simulation Time as java Timestamp  |
 |Temperature Sensor| 54001  | 10 * 60  | The outside Temperature in K  |
 |Barometer 1| 54002  |12 * 60|The outside air pressure in hPa|
 |Barometer 2| 54003  |12 * 60|The outside air pressure in hPa|
@@ -22,10 +22,10 @@ The energy simulation is based on the [Photovoltaic Geographical Information Sys
 |Air quality|54006|60|The C02 portion of the bathroom in ppm|
 |Air quality|54007|60|The C02 portion of the bedroom in ppm|
 |Air quality|54009|60|The C02 portion of the kitchen in ppm|
-|Window States|54010|10|The windows states in the living room in ppm|
-|Window States|54011|10|The windows states in the bathroom in ppm|
-|Window States|54012|10|The windows states in the bedroom in ppm|
-|Window States|54013|10|The windows states in the kitchen in ppm|
+|Window States|54010|10|The windows states in the living room as booleans|
+|Window States|54011|10|The windows states in the bathroom as booleans|
+|Window States|54012|10|The windows states in the bedroom as booleans|
+|Window States|54013|10|The windows states in the kitchen as booleans|
 |Energy Consumption|54014|60|The Energy Consumption of the hole Building in kW|
 |Photovoltaic Produce|54015|60|The Energy that is currently produced by the photovoltaic system in kW|
 |Battery state|54016|60|Send the currently stored and the maximum usable capacity in kWh|
